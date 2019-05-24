@@ -5,7 +5,7 @@ easy set jco native library path to system env.
 [jco-loader core](./core/README.md)
 
 ## example
-
+[jco example](./example/README.md)
 
 ## maven
 ```xml

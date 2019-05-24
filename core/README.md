@@ -25,18 +25,18 @@ for the following common use cases:
 </dependency>
 
 // Required imports.
-		import java.io.File;
-		import com.sap.conn.jco.*;
-		import com.github.easonjim.JcoProvisioner;
+import java.io.File;
+import com.sap.conn.jco.*;
+import com.github.easonjim.JcoProvisioner;
 
 // Extract to default location: ${user.dir}/native 
-		JcoProvisioner.provision();
-		JCoRuntime runtime = JCoRuntimeFactory.getRuntime();
+JcoProvisioner.provision();
+JCoRuntime runtime = JCoRuntimeFactory.getRuntime();
 
 // Extract to user provided library extract location.
-		final File location = new File("target/native");
-		JcoProvisioner.provision(location);
-		JCoRuntime runtime = JCoRuntimeFactory.getRuntime();
+final File location = new File("target/native");
+JcoProvisioner.provision(location);
+JCoRuntime runtime = JCoRuntimeFactory.getRuntime();
 ```
 
 ## Default extract location

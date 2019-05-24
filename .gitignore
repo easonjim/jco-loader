@@ -10,3 +10,5 @@ target
 .vscode
 bin
 gen
+*.jcoDestination
+*.trc
