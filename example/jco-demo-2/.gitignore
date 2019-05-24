@@ -12,3 +12,5 @@ bin
 gen
 *.jcoDestination
 *.trc
+
+native
