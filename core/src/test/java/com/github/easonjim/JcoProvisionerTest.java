@@ -86,7 +86,7 @@ public class JcoProvisionerTest {
         assertFalse(JcoProvisioner.isNativeLoaded());
 
         final File location = new File("target/native");
-        JcoProvisioner.provision(location, null);
+        JcoProvisioner.provision(location);
 
         assertTrue(JcoProvisioner.isNativeLoaded());
     }
@@ -96,9 +96,9 @@ public class JcoProvisionerTest {
 
         assertTrue(JcoProvisioner.isNativeLoaded());
 
-        JcoProvisioner.provision(new File("target/native1"), null);
-        JcoProvisioner.provision(new File("target/native2"), null);
-        JcoProvisioner.provision(new File("target/native3"), null);
+        JcoProvisioner.provision(new File("target/native1"));
+        JcoProvisioner.provision(new File("target/native2"));
+        JcoProvisioner.provision(new File("target/native3"));
 
         assertTrue(JcoProvisioner.isNativeLoaded());
 

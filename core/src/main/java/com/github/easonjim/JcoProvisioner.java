@@ -50,24 +50,9 @@ public class JcoProvisioner {
     public static final String SYSTEM_PROPERTY_TARGET = "sap.jco.target.folder";
 
     /**
-     * Environment variable which provides jco location. for source.
-     */
-    public static final String ENVIRONMENT_VARIABLE_SOURCE = "SAP_JCO_SOURCE_FOLDER";
-
-    /**
-     * System property which provides jco location. for source.
-     */
-    public static final String SYSTEM_PROPERTY_SOURCE = "sap.jco.source.folder";
-
-    /**
      * Hard coded value which provides jco extract location. for target.
      */
     public static final String DEFAULT_LOCATION_TARGET = System.getProperty("user.dir") + File.separator + LIB_DIR;
-
-    /**
-     * Hard coded value which provides jco location. for source.
-     */
-    public static final String DEFAULT_LOCATION_SOURCE = "/" + LIB_DIR;
 
     /**
      * Jco native path in system property location.
@@ -135,49 +120,6 @@ public class JcoProvisioner {
     }
 
     /**
-     * Provide jco library location. <br>
-     * Priority 1) user provided command line agent options. <br>
-     * Priority 2) user provided o/s environment variable. <br>
-     * Priority 3) user provided java system property. <br>
-     * Priority 4) hard coded location in ${user.dir}/native. <br>
-     *
-     * @param options Command line agent options.
-     * @return Provide jco library location.
-     */
-    public static String discoverProvidedLocation(final String options) {
-
-        /** Priority 1) user provided agent command line options. */
-        if (options != null) {
-            final String[] optionArray = options.split(",");
-            for (final String option : optionArray) {
-                if (option.startsWith(SYSTEM_PROPERTY_SOURCE) && option.contains("=")) {
-                    logger.info("Using location provided by options. for source.");
-                    return option.substring(option.indexOf("=") + 1);
-                }
-            }
-        }
-
-        /** Priority 2) user provided o/s environment variable. */
-        final String variable = System.getenv(ENVIRONMENT_VARIABLE_SOURCE);
-        if (variable != null) {
-            logger.info("Using location provided by environment variable. for source. path:" + variable);
-            return variable;
-        }
-
-        /** Priority 3) user provided java system property. */
-        final String property = System.getProperty(SYSTEM_PROPERTY_SOURCE);
-        if (property != null) {
-            logger.info("Using location provided by system property. for source. path:" + property);
-            return property;
-        }
-
-        /** Priority 4) hard coded location. */
-        logger.info("Using location provided by hard coded value. for source. path:" + DEFAULT_LOCATION_SOURCE);
-        return DEFAULT_LOCATION_SOURCE;
-
-    }
-
-    /**
      * Verify if jco native library is loaded and operational.
      *
      * @return true, if is native library loaded.
@@ -201,17 +143,16 @@ public class JcoProvisioner {
      * @throws Exception The provisioning failure exception.
      */
     public static void provision() throws Exception {
-        provision(new File(discoverLocation(null)), discoverProvidedLocation(null));
+        provision(new File(discoverLocation(null)));
     }
 
     /**
      * Extract and load native jco library in the provided folder.
      *
      * @param targetFolder     Library extraction folder.
-     * @param sourceFolderPath Provide Library folder path.
      * @throws Exception The provisioning failure exception.
      */
-    public static synchronized void provision(final File targetFolder, String sourceFolderPath)
+    public static synchronized void provision(final File targetFolder)
             throws Exception {
 
         if (!targetFolder.exists()) {
@@ -222,7 +163,7 @@ public class JcoProvisioner {
         final String libraryName = JCO_NATIVE_LIBRARY_NAMES.get(OsUtils.getOsShotName());
 
         /** Library location embedded in the jar class path. */
-        final String sourcePath = (sourceFolderPath == null ? "/" + LIB_DIR : sourceFolderPath) + "/" + libraryName;
+        final String sourcePath = "/" + LIB_DIR + "/" + libraryName;
 
         /** Absolute path to the extracted library the on file system. */
         final File targetPath = new File(targetFolder, libraryName).getAbsoluteFile();

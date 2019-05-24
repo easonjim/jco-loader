@@ -49,11 +49,6 @@ will be selected in the following priority order:
  2. system property ```sap.jco.target.folder```
  3. not set and use default hard coded ```${user.dir}/native```
 
-so you can custom provide library location:
- 1. environment variable ```SAP_JCO_SOURCE_FOLDER```
- 2. system property ```sap.jco.source.folder```
- 3. not set and use default hard coded ```/native```
-
 ## Compatible system version：
 * Windows
 * Linux
@@ -61,3 +56,4 @@ so you can custom provide library location:
 
 ## Maven central repositories version list:
 * 3.0.11(provide jco native library version: 3.0.11)
+* 3.0.11-rev001(provide jco native library version: 3.0.11)
