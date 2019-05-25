@@ -70,7 +70,6 @@ POM配置插件如下：
 先把依赖clone下来本地（git clone [https://github.com/easonjim/jco-sdk](https://github.com/easonjim/jco-sdk)），然后手动复制要用的lib即可。
 ```shell
 # 拷贝sapjco3.jar、sapjco3.dll、sapjco3.pdb、libsapjco3.jnilib、libsapjco3.so到lib文件夹
-# 该项目我已经拷贝好了所有要用的lib文件，所以无需操作上面步骤，了解即可
 ```
 ## 配置Maven依赖
 ```xml
@@ -82,6 +81,52 @@ POM配置插件如下：
     <systemPath>${project.basedir}/lib/sapjco3.jar</systemPath>
 </dependency>
 ```
+## 打包插件配置
+```xml
+<!-- 解决class path和main class -->
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<version>2.6</version>
+	<configuration>
+	    <archive>
+		<addMavenDescriptor>false</addMavenDescriptor>
+		<manifestEntries>
+		    <Class-Path>lib/sapjco3.jar</Class-Path>
+		</manifestEntries>
+		<manifest>
+		    <addClasspath>true</addClasspath>
+		    <classpathPrefix>lib/</classpathPrefix>
+		    <mainClass>com.github.easonjim.demo.ConnTest</mainClass>
+		</manifest>
+	    </archive>
+	</configuration>
+</plugin>
+<!-- 复制lib文件 -->
+<plugin>
+	<artifactId>maven-resources-plugin</artifactId>
+	<version>3.0.2</version>
+	<executions>
+	    <execution>
+		<id>copy-resources</id>
+		<phase>validate</phase>
+		<goals>
+		    <goal>copy-resources</goal>
+		</goals>
+		<configuration>
+		    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+		    <resources>
+			<resource>
+			    <directory>lib</directory>
+			    <filtering>false</filtering>
+			</resource>
+		    </resources>
+		</configuration>
+	    </execution>
+	</executions>
+</plugin>
+```
+
 ## 这种配置方式可以打包成直接运行的jar包，会同时附带lib文件夹
 * 这种方式的关键配置点在POM，增加了两个插件maven-jar-plugin用于输出MF文件的Class Path，maven-resources-plugin用于复制出lib文件夹
 * 使用时，直接拷贝jar包以及lib文件夹到指定计算机运行即可
