@@ -67,7 +67,7 @@ POM配置插件如下：
 这种方式免除配置环境变量，并且不用安装本地依赖，打包运行都非常方便。  
 原理：sapjco3.jar在没有配置环境变量时，会自动找当前目录下的动态链接库；以这条线索，只要把动态链接库拷贝到jar包的当前目录即可识别。
 ## 配置依赖
-先把依赖clone下来本地（git clone https://github.com/easonjim/jco-sdk），然后手动复制要用的lib即可。
+先把依赖clone下来本地（git clone [https://github.com/easonjim/jco-sdk](https://github.com/easonjim/jco-sdk)），然后手动复制要用的lib即可。
 ```shell
 # 拷贝sapjco3.jar、sapjco3.dll、sapjco3.pdb、libsapjco3.jnilib、libsapjco3.so到lib文件夹
 # 该项目我已经拷贝好了所有要用的lib文件，所以无需操作上面步骤，了解即可
