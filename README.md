@@ -2,10 +2,10 @@
 easy set jco native library path to system env.
 
 ## core
-[jco-loader core](./core/README.md)
+[jco-loader core](./core)
 
 ## example
-[jco example](./example/README.md)
+[jco example](./example/)
 
 ## maven
 ```xml
@@ -17,3 +17,4 @@ easy set jco native library path to system env.
 ```
 Maven central repositories version list:
 * 3.0.11(provide jco native library version: 3.0.11)
+* 3.0.11-rev001(provide jco native library version: 3.0.11)
