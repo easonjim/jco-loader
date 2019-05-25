@@ -88,7 +88,7 @@ POM配置插件如下：
 * 但这种方式适合Main方法项目，但不适合Spring Boot项目，总之，做测试绝对够用了。
 
 
-# 通用方式（适合Application/Web/Spring Boot）
+# 通用方式（非常推荐）（适合Application/Web/Spring Boot）
 * 通过Maven中央仓库插件，引入jco-loader替代本地lib文件夹引入jco-jar的方式，然后使用第1种的插件方式，自动打包出lib文件夹
 * Spring Boot项目无需配置plugin，本身已经集成打包插件，引入pom后无需做任何配置。  
 ## POM依赖：
